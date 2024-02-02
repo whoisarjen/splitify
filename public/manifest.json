@@ -4,6 +4,7 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
+  "orientation": "portrait-primary",
   "name": "Splitify",
   "short_name": "Splitify",
   "icons": [
