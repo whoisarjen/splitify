@@ -26,8 +26,13 @@ const nextConfig = {
   },
 }
 
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+})
+
 const withContentlayer = createContentlayerPlugin({
   // Additional Contentlayer config options
 });
 
-module.exports = withContentlayer(nextConfig);
+module.exports = withContentlayer(withPWA(nextConfig));
