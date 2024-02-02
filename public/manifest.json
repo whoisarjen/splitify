@@ -1,12 +1,13 @@
 {
+  "manifest_version": "1",
   "theme_color": "#121212",
   "background_color": "#121212",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "orientation": "portrait-primary",
-  "name": "Splitify",
-  "short_name": "Splitify",
+  "orientation": "portrait",
+  "name": "Test",
+  "short_name": "Test",
   "icons": [
     {
       "src": "icons/manifest-icon-192.maskable.png",
