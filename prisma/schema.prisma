@@ -11,11 +11,49 @@ datasource db {
   relationMode = "prisma"
 }
 
+model Expense {
+  id        String   @id @default(cuid())
+  name      String
+  amount    Float
+  code      String   @db.Char(3)
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+
+  paidBy   User   @relation("paid", fields: [paidById], references: [id], onDelete: Cascade)
+  paidById String
+
+  oweBy   User   @relation("owe", fields: [oweById], references: [id], onDelete: Cascade)
+  oweById String
+
+  @@index([paidById])
+  @@index([oweById])
+  @@map(name: "expenses")
+}
+
+model Friend {
+  id         String   @id @default(uuid())
+  isAccepted Boolean  @default(false)
+  createdAt  DateTime @default(now()) @map(name: "created_at")
+  updatedAt  DateTime @default(now()) @map(name: "updated_at")
+
+  approaching   User   @relation("approached", fields: [approachingId], references: [id], onDelete: Cascade)
+  approachingId String
+
+  approached   User   @relation("approachedBy", fields: [approachedId], references: [id], onDelete: Cascade)
+  approachedId String
+
+  @@unique([approachingId, approachedId])
+  @@index([approachingId])
+  @@index([approachedId])
+  @@map(name: "friends")
+}
+
 model Group {
   id          String   @id @default(uuid())
   name        String
   description String?
-  isActive  Boolean  @default(true)
+  image       String?
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @default(now()) @map(name: "updated_at")
 
@@ -50,9 +88,13 @@ model User {
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
 
-  accounts Account[]
-  sessions Session[]
-  groups   GroupsOnUsers[]
+  accounts     Account[]
+  sessions     Session[]
+  groups       GroupsOnUsers[]
+  approached   Friend[]        @relation("approached")
+  approachedBy Friend[]        @relation("approachedBy")
+  paid         Expense[]       @relation("paid")
+  owe          Expense[]       @relation("owe")
 
   stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
   stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")

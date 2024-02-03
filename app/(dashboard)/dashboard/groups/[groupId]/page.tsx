@@ -4,8 +4,9 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { DashboardShell } from "@/components/dashboard/shell"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { prisma } from "@/lib/db"
+import { cn } from "@/lib/utils"
 
 export const metadata = {
   title: "Dashboard",
@@ -29,20 +30,42 @@ export default async function GroupIdPage({
   }
 
   const group = await prisma.group.findFirstOrThrow({
+    include: {
+      users: true,
+    },
     where: {
         id: groupId,
+        users: {
+          some: {
+            user: {
+              id: user.id,
+            }
+          }
+        }
     }
   })
 
   return (
-    <DashboardShell>
-      <DashboardHeader heading={group.name} text={`Manage group ${group.name}.`}>
-        <Button>Delete Group</Button>
-        <Button>Save Changes</Button>
-      </DashboardHeader>
-      <div>
-        dasasddsasa
-      </div>
-    </DashboardShell>
+    <form>
+      <DashboardShell>
+        <DashboardHeader heading={group.name} text={`Manage group ${group.name}.`}>
+          <div className="flex justify-end gap-4">
+            <Button
+              className={cn(
+                buttonVariants({ variant: 'destructive' })
+              )}
+            >
+              Leave Group
+            </Button>
+            <Button>
+              Save Changes
+            </Button>
+          </div>
+        </DashboardHeader>
+        <div>
+          dasasddsasa
+        </div>
+      </DashboardShell>
+    </form>
   )
 }

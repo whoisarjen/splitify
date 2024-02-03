@@ -124,7 +124,7 @@ export default async function GroupsPage() {
           : (
             <div>
               <EmptyPlaceholder>
-                <EmptyPlaceholder.Icon name="post" />
+                <EmptyPlaceholder.Icon name="users" />
                 <EmptyPlaceholder.Title>No groups created</EmptyPlaceholder.Title>
                 <EmptyPlaceholder.Description>
                   You don&apost have any groups yet. Start creating groups.
