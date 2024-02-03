@@ -14,14 +14,30 @@ export const dashboardConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
-      title: "Panel",
+      title: "Expenses",
       href: "/dashboard",
-      icon: "post",
+      icon: "receiptText",
+    },
+    {
+      title: "Friends",
+      href: "/dashboard/friends",
+      icon: "user",
+    },
+    {
+      title: "Groups",
+      href: "/dashboard/groups",
+      icon: "users",
+    },
+    {
+      title: "Activity",
+      href: "/dashboard/activity",
+      icon: "lineChart",
     },
     {
       title: "Billing",
       href: "/dashboard/billing",
       icon: "billing",
+      disabled: true,
     },
     {
       title: "Settings",

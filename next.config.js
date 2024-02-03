@@ -23,6 +23,13 @@ const nextConfig = {
   },
   experimental: {
     serverComponentsExternalPackages: ["@prisma/client"],
+    serverActions: {
+      allowedOrigins: [
+        'localhost:3000',
+        'splitify-one.vercel.app',
+        'miniature-rotary-phone-wrr6j9666vrw2g5gr-3000.app.github.dev',
+      ],
+    },
   },
 }
 

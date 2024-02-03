@@ -21,8 +21,11 @@ import {
   SunMedium,
   Trash,
   User,
+  Users,
   X,
   LucideIcon,
+  LineChart,
+  ReceiptText,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -94,5 +97,8 @@ export const Icons = {
     </svg>
   ),
   user: User,
+  users: Users,
+  lineChart: LineChart,
+  receiptText: ReceiptText,
   warning: AlertTriangle,
 }
