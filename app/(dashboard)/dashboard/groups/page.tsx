@@ -82,9 +82,9 @@ export default async function GroupsPage() {
   return (
     <form action={handleOnAddGroup}>
       <DashboardShell>
-        <DashboardHeader heading="Groups" text="Create and manage groups.">
+        <DashboardHeader heading="Grupy" text="Twórz i zarządzaj grupami.">
           {/* TODO communicate why it's disabled */}
-          <Button disabled={isGroupLimit}>Add group</Button>
+          <Button disabled={isGroupLimit}>Stwórz grupę</Button>
         </DashboardHeader>
         {groups.length > 0
           ? (
@@ -112,7 +112,7 @@ export default async function GroupsPage() {
                       <CardContent className="h-10" />
                       <CardFooter>
                         <div className="h-8">
-                          Created {timeAgo(group.createdAt)}
+                          Stworzona {timeAgo(group.createdAt)}
                         </div>
                       </CardFooter>
                     </Card>
@@ -123,8 +123,8 @@ export default async function GroupsPage() {
           )
           : (
             <CustomEmptyPlaceholder
-              title="No groups created"
-              description="You don&apost have any groups yet. Start creating groups."
+              title="Brak g grupęrup"
+              description="Nie masz żadnych grup. Stwórz kilka."
               iconName="users"
               buttonText="Add group"
               href="/dashboard/groups"

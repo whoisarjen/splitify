@@ -55,10 +55,10 @@ export default async function GroupIdPage({
                 buttonVariants({ variant: 'destructive' })
               )}
             >
-              Leave Group
+              Opuść grupę
             </Button>
             <Button>
-              Save Changes
+              Zapisz zmiany
             </Button>
           </div>
         </DashboardHeader>
