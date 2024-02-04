@@ -15,6 +15,7 @@ export const ContainerPullToRefresh = ({
 
     const handleRefresh = async () => {
         await revalidatePathname(pathname)
+        return new Promise(resolve => setTimeout(resolve, 1000));
     }
 
     return (

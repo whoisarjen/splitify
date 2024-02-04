@@ -45,4 +45,31 @@ export const dashboardConfig: DashboardConfig = {
       icon: "settings",
     },
   ],
+  footerNav: [
+    {
+      title: "Friends",
+      href: "/dashboard/friends",
+      icon: "user",
+    },
+    {
+      title: "Groups",
+      href: "/dashboard/groups",
+      icon: "users",
+    },
+    {
+      title: "Expenses",
+      href: "/dashboard",
+      icon: "receiptText",
+    },
+    {
+      title: "Activity",
+      href: "/dashboard/activity",
+      icon: "lineChart",
+    },
+    {
+      title: "Settings",
+      href: "/dashboard/settings",
+      icon: "settings",
+    },
+  ],
 }
