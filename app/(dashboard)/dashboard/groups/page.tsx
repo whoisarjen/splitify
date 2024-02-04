@@ -84,7 +84,7 @@ export default async function GroupsPage() {
       <DashboardShell>
         <DashboardHeader heading="Grupy" text="Twórz i zarządzaj grupami.">
           {/* TODO communicate why it's disabled */}
-          <Button disabled={isGroupLimit}>Stwórz grupę</Button>
+          <Button disabled={isGroupLimit}>Dodaj</Button>
         </DashboardHeader>
         {groups.length > 0
           ? (
@@ -123,7 +123,7 @@ export default async function GroupsPage() {
           )
           : (
             <CustomEmptyPlaceholder
-              title="Brak g grupęrup"
+              title="Brak grup"
               description="Nie masz żadnych grup. Stwórz kilka."
               iconName="users"
               buttonText="Add group"

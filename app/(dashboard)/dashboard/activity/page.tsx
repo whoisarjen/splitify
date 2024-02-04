@@ -56,7 +56,7 @@ export default async function ActivityPage() {
 
   return (
     <DashboardShell>
-      <DashboardHeader heading="Aktywności" text="Historia twojej aktywności." />
+      <DashboardHeader heading="Historia" text="Historia twojej aktywności." />
         <div>
           {!!expenses.length
             ? (

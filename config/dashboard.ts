@@ -34,7 +34,7 @@ export const dashboardConfig: DashboardConfig = {
       icon: "lineChart",
     },
     {
-      title: "Billing",
+      title: "Płatności",
       href: "/dashboard/billing",
       icon: "billing",
       disabled: true,

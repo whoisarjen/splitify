@@ -7,7 +7,7 @@ export default function DashboardLoading() {
   return (
     <DashboardShell>
       <DashboardHeader heading="Grupy" text="Twórz i zarządzaj grupami.">
-        <Button>Stwórz grupę</Button>
+        <Button>Dodaj</Button>
       </DashboardHeader>
       <div className="divide-border-200 divide-y rounded-md border">
         <CardSkeleton />

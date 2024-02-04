@@ -66,7 +66,7 @@ export default async function FriendsPage() {
           href="/dashboard/users"
           className={cn(buttonVariants({}))}
         >
-          Dodaj znajomych
+          Dodaj
         </Link>
       </DashboardHeader>
       {!!pendingFriends.length &&

@@ -5,7 +5,7 @@ import { DashboardShell } from "@/components/dashboard/shell"
 export default function DashboardLoading() {
   return (
     <DashboardShell>
-    <DashboardHeader heading="Aktywności" text="Historia twojej aktywności." />
+    <DashboardHeader heading="Historia" text="Historia twojej aktywności." />
       <div className="divide-border-200 divide-y rounded-md border">
         <CardSkeleton />
         <CardSkeleton />
