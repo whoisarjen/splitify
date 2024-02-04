@@ -4,60 +4,55 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { DashboardShell } from "@/components/dashboard/shell"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { currentAsOptions } from "@/app/utils/global.utils"
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
+import { prisma } from "@/lib/db"
+import { FormCreateExpense } from "@/containers/forms/FormCreateExpense"
 
 export const metadata = {
   title: "Dashboard",
 }
 
-export default async function FriendsPage() {
+type ExpensesCreatePageProps = {
+  searchParams: {
+    type?: string
+    targetId?: string
+  }
+}
+
+export default async function ExpensesCreatePage({
+  searchParams: {
+    type,
+    targetId,
+  }
+}: ExpensesCreatePageProps) {
+  if ((type !== 'user' && type !== 'group') || !targetId) {
+    throw new Error("URL searchParams are not correct")
+  }
+
   const currentUser = await getCurrentUser()
 
   if (!currentUser) {
     redirect(authOptions?.pages?.signIn || "/login")
   }
 
-  const handleOnAddExpense = async (formData: FormData) => {
-    'use server'
-    console.log({ formData })
-  }
+  const target = type === 'user'
+    ? await prisma.user.findFirstOrThrow({
+      where: {
+        id: targetId,
+      }
+    })
+    : await prisma.group.findFirstOrThrow({
+        where: {
+          id: targetId,
+        }
+      })
 
   return (
     <DashboardShell>
-      <DashboardHeader heading="Expense" text="Create expense." />
-      <form className="flex justify-center" action={handleOnAddExpense}>
-        <div className="box-border flex max-w-96 flex-1 flex-col gap-4 p-6">
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" type="text" placeholder="Crispy Baked Chicken Wings" />
-          <Label htmlFor="amount">Amount</Label>
-          <Input id="amount" type="number" placeholder={`00.00 ${currentAsOptions[0].code}`} />
-          <Label htmlFor="currency">Currency</Label>
-          <Select>
-            <SelectTrigger id="currency">
-                <SelectValue placeholder={currentAsOptions[0].code} />
-            </SelectTrigger>
-            <SelectContent>
-                {currentAsOptions.map(option => (
-                    <SelectItem key={option.code} value={option.code}>{option.code}</SelectItem>
-                ))}
-            </SelectContent>
-          </Select>
-            <Button className={cn(buttonVariants({}))}>
-                Save
-            </Button>
-        </div>
-      </form>
+      <DashboardHeader heading="Wydatek" text={`Stwórz nowy wydatek dla ${target.name}.`} />
+      <FormCreateExpense
+        userId={currentUser.id}
+        targetId={targetId}
+      />
     </DashboardShell>
   )
 }

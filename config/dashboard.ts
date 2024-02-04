@@ -27,13 +27,11 @@ export const dashboardConfig: DashboardConfig = {
       title: "Groups",
       href: "/dashboard/groups",
       icon: "users",
-      disabled: true,
     },
     {
       title: "Activity",
       href: "/dashboard/activity",
       icon: "lineChart",
-      disabled: true,
     },
     {
       title: "Billing",

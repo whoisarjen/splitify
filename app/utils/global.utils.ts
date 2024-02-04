@@ -1091,7 +1091,7 @@ const currencyPool = {
 }
 
 export const currentAsOptions = [
+	currencyPool.PLN,
 	currencyPool.USD,
 	currencyPool.EUR,
-	currencyPool.PLN,
 ]

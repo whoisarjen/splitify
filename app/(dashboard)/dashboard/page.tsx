@@ -10,6 +10,9 @@ import { UserAvatar } from "@/components/shared/user-avatar"
 import { Icons } from "@/components/shared/icons"
 import { getFriendData, getFriends } from "@/app/utils/friends.utils"
 import Link from "next/link"
+import { CustomEmptyPlaceholder } from "@/components/CustomEmptyPlaceholder/CustomEmptyPlaceholder"
+import { getUnsettledExpenses } from "@/actions/expenses.action"
+import { type ExpenseCounter } from "@prisma/client"
 
 export const metadata = {
   title: "Dashboard",
@@ -58,7 +61,6 @@ const CardContent = ({
 }: CardContentProps) => {
   return (
     <Link
-      key={id}
       href={`/dashboard/expenses/create?type=${type}&targetId=${id}`}
       className="flex gap-6 p-6 hover:cursor-pointer hover:bg-accent hover:text-accent-foreground"
     >
@@ -155,6 +157,8 @@ export default async function DashboardPage() {
     getFriends(currentUser),
   ])
 
+  const UnsettledExpenses = await getUnsettledExpenses()
+
   const usersFromExpenses = expenses.map(expense => {
     if (expense.oweById === currentUser.id) {
       return expense.paidBy
@@ -165,45 +169,105 @@ export default async function DashboardPage() {
 
   const uniqueUsersFromExpenses = _.uniqBy(usersFromExpenses, 'id')
 
+  const transformUnsettledExpenses = (unsetlledExpenses: ({
+    userPlus: {
+        id: string;
+        name: string | null;
+        image: string | null;
+    };
+    userMinus: {
+        id: string;
+        name: string | null;
+        image: string | null;
+    };
+} & ExpenseCounter)[]) => {
+  return unsetlledExpenses.map(unsetlledExpense => {
+    const isCurrentUserPlusUser = unsetlledExpense.userPlusId === currentUser.id
+
+    return {
+      ...unsetlledExpense,
+      transformedTotalAmount: isCurrentUserPlusUser ? unsetlledExpense.totalAmount : -unsetlledExpense.totalAmount,
+      targerUser: isCurrentUserPlusUser ? unsetlledExpense.userMinus : unsetlledExpense.userPlus,
+    }
+  })
+}
+
   return (
     <DashboardShell>
-      <DashboardHeader heading="Expenses" text="Choose who owe you money." />
+      <DashboardHeader heading="Wydatki" text="Wybierz z kim chcesz utworzyć wydatek." />
+      {transformUnsettledExpenses(UnsettledExpenses).map(UnsettledExpense => {
+        return (
+          <div key={UnsettledExpense.id}>
+            {UnsettledExpense.targerUser.name}: {UnsettledExpense.transformedTotalAmount} {UnsettledExpense.code}
+          </div>
+        )
+      })}
+      {uniqueUsersFromExpenses.length > 0 &&
+        <Card
+          title="Ostatnio używani"
+          description="Ostatnio wykorzystywane opcje."
+        >
+          {uniqueUsersFromExpenses.map(user =>
+            <CardContent
+              {...user}
+              key={user.id}
+              description={user.id}
+              type='user'
+            />
+          )}
+        </Card>
+      }
       <Card
-        title="Recent"
-        description="Users recently connected to you."
+        title="Grupy"
+        description="Grupy, których jesteś członkiem."
       >
-        {uniqueUsersFromExpenses.map(user =>
-          <CardContent
-            {...user}
-            description={user.id}
-            type='user'
-          />
-        )}
+        {groups.length > 0
+          ? (
+            groups.map(group =>
+              <CardContent
+                {...group}
+                key={group.id}
+                type='group'
+                description={group.users.map(({ user }) => user.name).join(', ')}
+                customIcon={<Icons.users className="size-4" />}
+              />
+            )
+          )
+          : (
+            <CustomEmptyPlaceholder
+              title="Brak grup"
+              description="Nie masz żadnych grup. Utwórz nową."
+              iconName="users"
+              buttonText="Add group"
+              href="/dashboard/groups"
+            />
+          )}
       </Card>
       <Card
-        title="Groups"
-        description="Groups you are a member of."
+        title="Znaomi"
+        description="Użytkownicy, którzy są twoimi znajomymi."
       >
-        {groups.map(group =>
-          <CardContent
-            {...group}
-            type='group'
-            description={group.users.map(({ user }) => user.name).join(', ')}
-            customIcon={<Icons.users className="size-4" />}
-          />
-        )}
-      </Card>
-      <Card
-        title="Friends"
-        description="Users who are your friends."
-      >
-        {friends.map(friend =>
-          <CardContent
-            {...getFriendData(currentUser)(friend)}
-            description={friend.id}
-            type='user'
-          />
-        )}
+        {friends.length > 0
+          ? (
+            friends.map(friend =>
+              <CardContent
+                {...getFriendData(currentUser)(friend)}
+                key={friend.id}
+                description={friend.id}
+                type='user'
+              />
+            )
+          )
+          : (
+            <CustomEmptyPlaceholder
+              title="Brak znaomych"
+              description="Nie masz jeszcze znajomych. Dodaj ich."
+              iconName="user"
+              buttonText="Add friends"
+              href="/dashboard/friends"
+            />
+          )
+        }
       </Card>
     </DashboardShell>
   )

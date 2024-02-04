@@ -13,7 +13,7 @@ datasource db {
 
 model Expense {
   id        String   @id @default(cuid())
-  name      String
+  name      String   @db.VarChar(128)
   amount    Float
   code      String   @db.Char(3)
   createdAt DateTime @default(now()) @map(name: "created_at")
@@ -28,6 +28,25 @@ model Expense {
   @@index([paidById])
   @@index([oweById])
   @@map(name: "expenses")
+}
+
+model ExpenseCounter {
+  id          String   @id @default(cuid())
+  totalAmount Float    @default(0)
+  code        String   @db.Char(3)
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @default(now()) @map(name: "updated_at")
+
+  userPlus   User   @relation("user_plus", fields: [userPlusId], references: [id], onDelete: Cascade)
+  userPlusId String
+
+  userMinus   User   @relation("user_minus", fields: [userMinusId], references: [id], onDelete: Cascade)
+  userMinusId String
+
+  @@unique([userPlusId, userMinusId, code])
+  @@index([userPlusId])
+  @@index([userMinusId])
+  @@map(name: "expenses_counter")
 }
 
 model Friend {
@@ -91,10 +110,12 @@ model User {
   accounts     Account[]
   sessions     Session[]
   groups       GroupsOnUsers[]
-  approached   Friend[]        @relation("approached")
-  approachedBy Friend[]        @relation("approachedBy")
-  paid         Expense[]       @relation("paid")
-  owe          Expense[]       @relation("owe")
+  approached   Friend[]         @relation("approached")
+  approachedBy Friend[]         @relation("approachedBy")
+  paid         Expense[]        @relation("paid")
+  owe          Expense[]        @relation("owe")
+  userPlus     ExpenseCounter[] @relation("user_plus")
+  userMinus    ExpenseCounter[] @relation("user_minus")
 
   stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
   stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")

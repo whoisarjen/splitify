@@ -78,7 +78,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta name="theme-color" content="#000000" />
         <meta
           name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+          content='minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
         />
 
         <link rel="apple-touch-icon" href="/icons/touch-icon-iphone.png" />

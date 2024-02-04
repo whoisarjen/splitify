@@ -2,7 +2,6 @@ import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { EmptyPlaceholder } from "@/components/shared/empty-placeholder"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { DashboardShell } from "@/components/dashboard/shell"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -13,6 +12,7 @@ import Link from "next/link"
 import { type Friend } from "@prisma/client"
 import { UserAvatar } from "@/components/shared/user-avatar"
 import { getFriendData, getFriends } from "@/app/utils/friends.utils"
+import { CustomEmptyPlaceholder } from "@/components/CustomEmptyPlaceholder/CustomEmptyPlaceholder"
 
 export const metadata = {
   title: "Dashboard",
@@ -127,21 +127,13 @@ export default async function FriendsPage() {
           </div>
         )
         : (
-          <div>
-            <EmptyPlaceholder>
-              <EmptyPlaceholder.Icon name="user" />
-              <EmptyPlaceholder.Title>No friends added</EmptyPlaceholder.Title>
-              <EmptyPlaceholder.Description>
-                You don&apos;t have any friends yet. Start adding friends.
-              </EmptyPlaceholder.Description>
-              <Link
-                href="/dashboard/users"
-                className={cn(buttonVariants({ variant: 'outline' }))}
-              >
-                Add friends
-              </Link>
-            </EmptyPlaceholder>
-          </div>
+          <CustomEmptyPlaceholder
+            title="No friends added"
+            description="You do not have any friends yet. Start adding friends."
+            iconName="user"
+            buttonText="Add friends"
+            href="/dashboard/friends"
+          />
         )}
     </DashboardShell>
   )

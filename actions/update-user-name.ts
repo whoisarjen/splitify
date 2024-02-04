@@ -2,7 +2,7 @@
 
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import { userNameSchema } from "@/lib/validations/user";
+import { userNameSchema } from "@/lib/validations/user.schema";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 

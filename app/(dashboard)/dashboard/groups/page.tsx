@@ -2,7 +2,6 @@ import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { EmptyPlaceholder } from "@/components/shared/empty-placeholder"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { DashboardShell } from "@/components/dashboard/shell"
 import { Button } from "@/components/ui/button"
@@ -13,6 +12,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { timeAgo } from "@/lib/utils"
 import { Icons } from "@/components/shared/icons"
 import Link from "next/link"
+import { CustomEmptyPlaceholder } from "@/components/CustomEmptyPlaceholder/CustomEmptyPlaceholder"
 
 export const metadata = {
   title: "Dashboard",
@@ -122,16 +122,13 @@ export default async function GroupsPage() {
             </div>
           )
           : (
-            <div>
-              <EmptyPlaceholder>
-                <EmptyPlaceholder.Icon name="users" />
-                <EmptyPlaceholder.Title>No groups created</EmptyPlaceholder.Title>
-                <EmptyPlaceholder.Description>
-                  You don&apost have any groups yet. Start creating groups.
-                </EmptyPlaceholder.Description>
-                <Button variant="outline">Add group</Button>
-              </EmptyPlaceholder>
-            </div>
+            <CustomEmptyPlaceholder
+              title="No groups created"
+              description="You don&apost have any groups yet. Start creating groups."
+              iconName="users"
+              buttonText="Add group"
+              href="/dashboard/groups"
+            />
           )}
       </DashboardShell>
     </form>

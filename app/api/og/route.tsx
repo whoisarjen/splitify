@@ -1,6 +1,6 @@
 import { ImageResponse } from "@vercel/og"
 
-import { ogImageSchema } from "@/lib/validations/og"
+import { ogImageSchema } from "@/lib/validations/og,schema"
 
 export const runtime = "edge"
 
