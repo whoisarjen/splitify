@@ -61,12 +61,12 @@ export default async function FriendsPage() {
 
   return (
     <DashboardShell>
-      <DashboardHeader heading="Friends" text="Create and manage friends.">
+      <DashboardHeader heading="Znajomi" text="Dodawaj i zarządzaj znajomymi.">
         <Link
           href="/dashboard/users"
           className={cn(buttonVariants({}))}
         >
-          Add friends
+          Dodaj znajomych
         </Link>
       </DashboardHeader>
       {!!pendingFriends.length &&
@@ -89,12 +89,12 @@ export default async function FriendsPage() {
                 <div className="ml-auto flex gap-2">
                   <form action={handleOnAcceptInviation(pendingFriend)}>
                     <Button>
-                      Accept
+                      Zaakceptuj
                     </Button>
                   </form>
                   <form action={handleOnDeclineInviation(pendingFriend)}>
                     <Button className={cn(buttonVariants({ variant: 'destructive' }))}>
-                      Decline
+                      Odrzuć
                     </Button>
                   </form>
                 </div>

@@ -3,7 +3,7 @@ import { DocsConfig } from "types"
 export const docsConfig: DocsConfig = {
   mainNav: [
     {
-      title: "Documentation",
+      title: "Dokumentacja",
       href: "/docs",
     },
     {
@@ -22,7 +22,7 @@ export const docsConfig: DocsConfig = {
       ],
     },
     {
-      title: "Documentation",
+      title: "Dokumentacja",
       items: [
         {
           title: "Introduction",

@@ -3,33 +3,33 @@ import { DashboardConfig } from "types"
 export const dashboardConfig: DashboardConfig = {
   mainNav: [
     {
-      title: "Documentation",
+      title: "Dokumentacja",
       href: "/docs",
     },
     {
-      title: "Support",
+      title: "Wsparcie",
       href: "/support",
       disabled: true,
     },
   ],
   sidebarNav: [
     {
-      title: "Expenses",
+      title: "Wydatki",
       href: "/dashboard",
       icon: "receiptText",
     },
     {
-      title: "Friends",
+      title: "Znajomi",
       href: "/dashboard/friends",
       icon: "user",
     },
     {
-      title: "Groups",
+      title: "Grupy",
       href: "/dashboard/groups",
       icon: "users",
     },
     {
-      title: "Activity",
+      title: "Historia",
       href: "/dashboard/activity",
       icon: "lineChart",
     },
@@ -40,34 +40,34 @@ export const dashboardConfig: DashboardConfig = {
       disabled: true,
     },
     {
-      title: "Settings",
+      title: "Ustawienia",
       href: "/dashboard/settings",
       icon: "settings",
     },
   ],
   footerNav: [
     {
-      title: "Friends",
+      title: "Znajomi",
       href: "/dashboard/friends",
       icon: "user",
     },
     {
-      title: "Groups",
+      title: "Grupy",
       href: "/dashboard/groups",
       icon: "users",
     },
     {
-      title: "Expenses",
+      title: "Wydatki",
       href: "/dashboard",
       icon: "receiptText",
     },
     {
-      title: "Activity",
+      title: "Historia",
       href: "/dashboard/activity",
       icon: "lineChart",
     },
     {
-      title: "Settings",
+      title: "Ustawienia",
       href: "/dashboard/settings",
       icon: "settings",
     },
