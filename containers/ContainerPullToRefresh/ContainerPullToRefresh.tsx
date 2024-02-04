@@ -1,6 +1,7 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { revalidatePathname } from '@/actions/global.action'
+import { usePathname } from 'next/navigation'
 import ReactPullToRefresh from 'react-pull-to-refresh'
 
 type ContainerPullToRefreshProps = {
@@ -10,10 +11,10 @@ type ContainerPullToRefreshProps = {
 export const ContainerPullToRefresh = ({
     children,
 }: ContainerPullToRefreshProps) => {
-    const router = useRouter();
+    const pathname = usePathname()
 
     const handleRefresh = async () => {
-        router.refresh();
+        await revalidatePathname(pathname)
     }
 
     return (
