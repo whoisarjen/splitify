@@ -2,7 +2,7 @@
 
 import { revalidatePathname } from '@/actions/global.action'
 import { usePathname } from 'next/navigation'
-import ReactPullToRefresh from 'react-pull-to-refresh'
+import PullToRefresh from 'react-simple-pull-to-refresh';
 
 type ContainerPullToRefreshProps = {
     children: React.ReactNode
@@ -18,8 +18,10 @@ export const ContainerPullToRefresh = ({
     }
 
     return (
-        <ReactPullToRefresh onRefresh={handleRefresh}> 
-            {children}
-        </ReactPullToRefresh>
+        <PullToRefresh onRefresh={handleRefresh}>
+            <>
+                {children}
+            </>
+        </PullToRefresh>
     )
 }
