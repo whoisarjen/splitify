@@ -1,13 +1,13 @@
 {
-  "version": "1.0",
+  "version": "1.0.0.1",
   "theme_color": "#121212",
   "background_color": "#121212",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "/dashboard",
   "orientation": "portrait",
-  "name": "Test",
-  "short_name": "Test",
+  "name": "Splitify",
+  "short_name": "Splitify",
   "icons": [
     {
       "src": "icons/manifest-icon-192.maskable.png",
