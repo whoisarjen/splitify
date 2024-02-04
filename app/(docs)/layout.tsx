@@ -3,7 +3,6 @@ import Link from "next/link"
 import { DocsSearch } from "@/components/docs/search"
 import { DocsSidebarNav } from "@/components/docs/sidebar-nav"
 import { NavBar } from "@/components/layout/navbar"
-import { SiteFooter } from "@/components/layout/site-footer"
 import { Icons } from "@/components/shared/icons"
 import { docsConfig } from "@/config/docs"
 import { siteConfig } from "@/config/site"
@@ -43,7 +42,6 @@ export default async function DocsLayout({ children }: DocsLayoutProps) {
         <DocsSidebarNav items={docsConfig.sidebarNav} />
       </NavBar>
       <div className="container flex-1">{children}</div>
-      <SiteFooter className="border-t" />
     </div>
   )
 }

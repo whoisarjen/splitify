@@ -42,7 +42,7 @@ export default async function IndexPage() {
             style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
           >
             Kick off with a bang with{" "}
-            <span className="text-gradient_indigo-purple font-extrabold">
+            <span className="te>ple font-extrabold">
               SaaS Starter
             </span>
           </h1>

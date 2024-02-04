@@ -244,7 +244,7 @@ export default async function DashboardPage() {
           )}
       </Card>
       <Card
-        title="Znaomi"
+        title="Znajomi"
         description="Użytkownicy, którzy są twoimi znajomymi."
       >
         {friends.length > 0
@@ -260,7 +260,7 @@ export default async function DashboardPage() {
           )
           : (
             <CustomEmptyPlaceholder
-              title="Brak znaomych"
+              title="Brak znajomych"
               description="Nie masz jeszcze znajomych. Dodaj ich."
               iconName="user"
               buttonText="Add friends"
