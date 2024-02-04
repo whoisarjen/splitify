@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { type Friend } from "@prisma/client"
 import { UserAvatar } from "@/components/shared/user-avatar"
-import { getFriendData, getFriends } from "@/app/utils/friends.utils"
+import { getFriendData, getFriends } from "@/utils/friends.utils"
 import { CustomEmptyPlaceholder } from "@/components/CustomEmptyPlaceholder/CustomEmptyPlaceholder"
 
 export const metadata = {

@@ -5,6 +5,7 @@ import { NavBar } from "@/components/layout/navbar"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { dashboardConfig } from "@/config/dashboard"
 import { getCurrentUser } from "@/lib/session"
+import { ContainerPullToRefresh } from "@/containers/ContainerPullToRefresh"
 
 interface DashboardLayoutProps {
   children?: React.ReactNode
@@ -28,7 +29,9 @@ export default async function DashboardLayout({
           <DashboardNav items={dashboardConfig.sidebarNav} />
         </aside>
         <main className="flex w-full flex-1 flex-col overflow-hidden">
-          {children}
+          <ContainerPullToRefresh>
+            {children}
+          </ContainerPullToRefresh>
         </main>
       </div>
       <SiteFooter className="border-t" />

@@ -7,7 +7,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-import { currentAsOptions } from "@/app/utils/global.utils"
+import { currentAsOptions } from "@/utils/global.utils"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"

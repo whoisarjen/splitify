@@ -1,4 +1,4 @@
-import { currentAsOptions } from "@/app/utils/global.utils"
+import { currentAsOptions } from "@/utils/global.utils"
 import * as z from "zod"
 
 export const createExpenseSchema = z.object({
